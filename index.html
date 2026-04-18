@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Para Mariana Fernandes❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div id="flash"></div>
+
+<!-- INTRO -->
+<div id="intro">
+  <div class="intro-pulse">♥</div>
+  <h1 class="intro-title">Tenho uma<br><em>surpresa especial</em><br>para você</h1>
+  <button class="btn-start" onclick="iniciar()">Aperte aqui pra<br>Começar ♥</button>
+</div>
+
+<!-- CONTEÚDO PRINCIPAL -->
+<div id="conteudo">
+  <div class="card" id="card">
+
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="avatar">♥</div>
+        <div>
+          <div class="card-name">Para você</div>
+          <div class="card-sub">Com amor do seu namorado ♥</div>
+        </div>
+      </div>
+      <div class="card-header-dots">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="img-wrap" id="imgWrap">
+      <div class="img-placeholder" id="imgPlaceholder">
+        <div class="img-placeholder-icon">♥</div>
+        <div class="img-placeholder-text">Memórias</div>
+      </div>
+      <img id="imagem" src="" alt="Foto">
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="card-body">
+      <h2 id="texto"></h2>
+      <div class="hint-row">
+        <div class="hint">toque para continuar</div>
+        <div class="dots" id="dots"></div>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <button onclick="voltarInicio()"><span>↩</span> início</button>
+      <button class="btn-next" >Próximo →</button>
+      <button onclick="emitirCoracao()"><span>♥</span> curtir</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- CARTA FINAL -->
+<div id="carta-container">
+  <div class="envelope-wrap">
+    <div class="envelope" id="envelope" onclick="abrirCarta()">
+      <div class="env-body">
+        <div class="env-tampa"></div>
+        <div class="env-side left"></div>
+        <div class="env-side right"></div>
+        <div class="env-bottom"></div>
+        <div class="lacre">♥</div>
+        <div class="carta-interna">
+          <p>
+            Meu amor,<br>
+            Você é a coisa mais bonita que já aconteceu na minha vida.<br>
+            Cada detalhe seu é especial — seu sorriso, seu olhar, sua forma de ser.<br>
+            Obrigado por existir e por fazer tudo mais lindo.
+          </p>
+          <p class="assinatura">Com todo meu amor ♥<br>David Luiz</p>
+        </div>
+      </div>
+    </div>
+    <div class="env-hint">toque para abrir</div>
+    <button class="btn-reiniciar" onclick="voltarInicio()">↩ Recomeçar do início</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
