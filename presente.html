@@ -1,30 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nosso Presente ❤️</title>
-
-<link rel="stylesheet" href="presente.css">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Nosso Presente ❤️</title>
+  <link rel="stylesheet" href="presente.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<h1>Nosso maior presente 👶❤️</h1>
+  <div class="galeria" id="galeria">
+    <img src="imagens/familia1.jpeg" alt="Família " class="ativa">
+    <img src="imagens/familia2.jpeg" alt="Família ">
+    <img src="imagens/gatao.jpeg"    alt="Gatão">
+    <img src="imagens/familia3.jpg" alt="Familia">
+    <img src="imagens/pascoa1.jpg" alt="Familia">
+    <img src="imagens/pascoa2.jpg" alt="Familia">
+    <img src="imagens/pascoa3.jpg" alt="Familia">
+  </div>
 
-<div class="galeria">
-  <img src="imagens/familia1.jpeg" class="ativa">
-  <img src="imagens/familia2.jpeg">
-  <img src="imagens/gatao.jpeg">
-</div>
+  <div class="vinheta"></div>
 
-<div class="botoes">
-  <button onclick="anterior()">← Anterior</button>
-  <button onclick="proximo()">Próxima →</button>
-  <button onclick="voltar()">↩ Voltar</button>
-</div>
+  <header class="topo">
+    <h1>Nosso maior presente 👶❤️<br>Te AMAMOS MUITO MAMÃE</h1>
+    <span class="badge" id="contador">1 / 3</span>
+  </header>
 
-<script src="presente.js"></script>
+  <div class="legenda">
+    <span>Memória</span>
+    <h2 id="desc">Família</h2>
+  </div>
+
+  <nav class="botoes" aria-label="Controles da galeria">
+    <button onclick="anterior()" aria-label="Imagem anterior">&#8592;</button>
+    <div class="dots" id="dots"></div>
+    <button onclick="proximo()"  aria-label="Próxima imagem">&#8594;</button>
+  </nav>
+
+  <button class="btn-voltar" onclick="voltar()" aria-label="Voltar">&#8617; Voltar</button>
+
+  <div class="progress" id="progress"></div>
+
+  <script src="presente.js"></script>
 </body>
 </html>

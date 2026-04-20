@@ -1,73 +1,166 @@
+/* ── RESET ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'DM Sans', sans-serif;
   background: #000;
   color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  height: 100dvh; /* dvh em vez de vh — respeita barra do celular */
   overflow: hidden;
 }
 
+/* ── TÍTULO ── */
 h1 {
   position: absolute;
-  top: 30px;
+  top: clamp(16px, 4vw, 30px); /* escala com a tela */
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
   font-weight: 300;
-  letter-spacing: 1px;
+  font-size: clamp(14px, 3vw, 22px);
+  letter-spacing: 2px;
+  text-transform: uppercase;
   z-index: 2;
+  white-space: nowrap;
 }
 
-/* GALERIA */
+/* ── GALERIA ── */
 .galeria {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
-/* IMAGENS */
+/* Vinheta cinematográfica nas bordas */
+.galeria::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.6) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── IMAGENS ── */
 .galeria img {
   position: absolute;
+  inset: -5%;
   width: 110%;
   height: 110%;
-  object-fit: cover;
+  object-fit: cover;       /* ← preenche o espaço sem distorcer */
+  object-position: center; /* ← centraliza o foco da imagem */
   opacity: 0;
   filter: blur(10px) brightness(0.6);
   transform: scale(1.1) translateY(20px);
-  transition: 
+  transition:
     opacity 1.5s ease,
     transform 4s ease,
     filter 1.5s ease;
+  will-change: opacity, transform, filter;
 }
 
-/* IMAGEM ATIVA (EFEITO GTA) */
+/* IMAGEM ATIVA — efeito GTA */
 .galeria img.ativa {
   opacity: 1;
   filter: blur(0px) brightness(1);
   transform: scale(1.05) translateY(0);
 }
 
-/* BOTÕES */
+/* ── BARRA DE PROGRESSO ── */
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: rgba(255, 77, 109, .85);
+  z-index: 3;
+}
+
+/* ── BOTÕES ── */
 .botoes {
   position: absolute;
-  bottom: 30px;
+  bottom: clamp(16px, 4vw, 30px);
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 2vw, 14px);
 }
 
 button {
   background: rgba(255, 77, 109, 0.8);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari */
   color: white;
   border: none;
-  padding: 10px 20px;
-  margin: 5px;
+  padding: clamp(8px, 2vw, 10px) clamp(14px, 3vw, 20px);
+  font-size: clamp(13px, 2vw, 15px);
   border-radius: 10px;
   cursor: pointer;
+  transition: background .2s, transform .15s;
+  /* toque mais fácil no mobile */
+  min-width: 44px;
+  min-height: 44px;
 }
 
 button:hover {
   background: rgba(255, 31, 75, 0.9);
+  transform: scale(1.04);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* ── DOTS / INDICADORES ── */
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .35);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background .3s, transform .3s;
+}
+
+.dot.ativo {
+  background: #ff4d6d;
+  transform: scale(1.5);
+}
+
+/* ── LEGENDA (opcional) ── */
+.legenda {
+  position: absolute;
+  bottom: clamp(60px, 12vw, 90px);
+  left: clamp(16px, 5vw, 40px);
+  z-index: 2;
+  max-width: min(55%, 320px);
+}
+
+.legenda span {
+  font-size: clamp(10px, 1.8vw, 13px);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.legenda h2 {
+  font-size: clamp(18px, 4vw, 28px);
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+/* ── RESPONSIVIDADE: landscape mobile ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  h1 { font-size: 12px; top: 10px; }
+  .botoes { bottom: 10px; }
+  .legenda { display: none; }
 }
