@@ -274,14 +274,26 @@ function voltarInicio() {
 
 function abrirCarta() {
   const env = document.getElementById("envelope");
+  const botao = document.getElementById("btnPresente");
+
   if (env.classList.contains("aberto")) return;
   env.classList.add("aberto");
 
+  // efeitos de coração
   for (let i = 0; i < 20; i++) {
     setTimeout(() => emitirCoracao(true), i * 60);
   }
-}
 
+  // MOSTRAR BOTÃO DO PRESENTE
+  if (botao) {
+    botao.style.display = "block";
+
+    // efeito suave (opcional)
+    setTimeout(() => {
+      botao.style.opacity = "1";
+    }, 100);
+  }
+}
 /* ══════════════════════════════════════ */
 /* CORAÇÕES FLUTUANTES                  */
 /* ══════════════════════════════════════ */
@@ -375,3 +387,5 @@ const particles = Array.from({ length: 80 }, () => new Particle());
   particles.forEach(p => { p.update(); p.draw(); });
   requestAnimationFrame(loop);
 })();
+
+
