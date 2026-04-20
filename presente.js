@@ -1,10 +1,10 @@
 const imagens    = document.querySelectorAll(".galeria img");
-const dotsEl     = document.getElementById("dots");       // ← era "indicadores", HTML usa "dots"
+const dotsEl     = document.getElementById("dots");
 const progressEl = document.getElementById("progress");
 const descEl     = document.getElementById("desc");
 const contEl     = document.getElementById("contador");
 
-const DESCS    = ["Família", "Família 2", "Gatão"];       // ← personalize com seus textos
+const DESCS    = ["Família", "Família 2", "Gatão"];
 const INTERVALO = 5000;
 
 let index = 0, autoplay = true, timer = null;
@@ -76,17 +76,44 @@ document.addEventListener("keydown", e => {
   if (e.key === "ArrowLeft")  anterior();
 });
 
-// Pausa o autoplay quando a aba fica em background (economiza bateria)
+// Pausa o autoplay quando a aba fica em background
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
     clearInterval(timer);
     progressEl.style.transition = "none";
     progressEl.style.width = "0%";
+    // Salva tempo ao esconder
+    localStorage.setItem("audioTime", audio.currentTime);
   } else {
     iniciarAutoplay();
+    if (!audio.paused) return;
+    audio.play().catch(() => {});
   }
 });
 
-// Inicia
+// Inicia galeria
 mostrarImagem(0);
 iniciarAutoplay();
+
+/* ══════════════════════════════════════ */
+/* ÁUDIO — retoma do ponto onde parou   */
+/* ══════════════════════════════════════ */
+
+const audio = new Audio("musica.mp3");
+audio.loop = true;
+
+const savedTime = parseFloat(localStorage.getItem("audioTime") || "0");
+
+audio.addEventListener("canplay", () => {
+  if (savedTime > 0) audio.currentTime = savedTime;
+}, { once: true });
+
+audio.addEventListener("timeupdate", () => {
+  localStorage.setItem("audioTime", audio.currentTime);
+});
+
+// Toca direto, sem esperar clique
+audio.play().catch(() => {
+  // Se o navegador bloquear, toca no primeiro clique
+  document.addEventListener("click", () => audio.play(), { once: true });
+});

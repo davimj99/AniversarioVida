@@ -43,6 +43,12 @@ let iniciou = false;
 const audio = new Audio("musica.mp3");
 audio.loop = true;
 
+// Salva o tempo atual do áudio constantemente
+audio.addEventListener("timeupdate", () => {
+  localStorage.setItem("audioTime", audio.currentTime);
+  localStorage.setItem("audioPlaying", "true");
+});
+
 /* ══════════════════════════════════════ */
 /* INICIAR                              */
 /* ══════════════════════════════════════ */
@@ -197,11 +203,9 @@ function encerrar() {
   setTimeout(() => {
     conteudo.style.display = "none";
 
-    // Mostrar container mas ainda invisível
     carta.style.display = "flex";
     carta.style.opacity = "0";
 
-    // Aguardar 1 frame para o display:flex ser aplicado, então animar
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         carta.style.transition = "opacity 1s ease";
@@ -226,6 +230,10 @@ function voltarInicio() {
   clearInterval(slideInterval);
   audio.pause();
   audio.currentTime = 0;
+
+  // Limpar áudio salvo no localStorage
+  localStorage.removeItem("audioTime");
+  localStorage.removeItem("audioPlaying");
 
   // Resetar estado
   index = 0;
@@ -279,21 +287,16 @@ function abrirCarta() {
   if (env.classList.contains("aberto")) return;
   env.classList.add("aberto");
 
-  // efeitos de coração
   for (let i = 0; i < 20; i++) {
     setTimeout(() => emitirCoracao(true), i * 60);
   }
 
-  // MOSTRAR BOTÃO DO PRESENTE
   if (botao) {
     botao.style.display = "block";
-
-    // efeito suave (opcional)
-    setTimeout(() => {
-      botao.style.opacity = "1";
-    }, 100);
+    setTimeout(() => { botao.style.opacity = "1"; }, 100);
   }
 }
+
 /* ══════════════════════════════════════ */
 /* CORAÇÕES FLUTUANTES                  */
 /* ══════════════════════════════════════ */
@@ -387,5 +390,3 @@ const particles = Array.from({ length: 80 }, () => new Particle());
   particles.forEach(p => { p.update(); p.draw(); });
   requestAnimationFrame(loop);
 })();
-
-
