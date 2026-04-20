@@ -9,15 +9,6 @@ const INTERVALO = 5000;
 
 let index = 0, autoplay = true, timer = null;
 
-// Cria os dots dinamicamente
-imagens.forEach((_, i) => {
-  const dot = document.createElement("button");
-  dot.className = "dot" + (i === 0 ? " ativo" : "");
-  dot.setAttribute("aria-label", `Ir para imagem ${i + 1}`);
-  dot.onclick = () => irPara(i);
-  dotsEl.appendChild(dot);
-});
-
 function mostrarImagem(i) {
   imagens.forEach(img => img.classList.remove("ativa"));
   document.querySelectorAll(".dot").forEach(d => d.classList.remove("ativo"));

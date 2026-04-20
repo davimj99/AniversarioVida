@@ -1,30 +1,16 @@
 /* ── RESET ── */
 *, *::before, *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
   font-family: 'DM Sans', sans-serif;
   background: #000;
   color: white;
-  height: 100dvh; /* dvh em vez de vh — respeita barra do celular */
+  height: 100dvh;
   overflow: hidden;
-}
-
-/* ── TÍTULO ── */
-h1 {
-  position: absolute;
-  top: clamp(16px, 4vw, 30px); /* escala com a tela */
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  font-weight: 300;
-  font-size: clamp(14px, 3vw, 22px);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  z-index: 2;
-  white-space: nowrap;
 }
 
 /* ── GALERIA ── */
@@ -33,41 +19,175 @@ h1 {
   width: 100%;
   height: 100dvh;
   overflow: hidden;
+  background: #0a0a0a;
 }
 
-/* Vinheta cinematográfica nas bordas */
+/* Vinheta cinematográfica */
 .galeria::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.6) 100%);
+  background:
+    linear-gradient(to bottom,
+      rgba(0,0,0,0.5) 0%,
+      transparent 22%,
+      transparent 60%,
+      rgba(0,0,0,0.75) 100%),
+    radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%);
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
-/* ── IMAGENS ── */
+/* ── IMAGENS BASE ── */
 .galeria img {
   position: absolute;
-  inset: -5%;
-  width: 110%;
-  height: 110%;
-  object-fit: cover;       /* ← preenche o espaço sem distorcer */
-  object-position: center; /* ← centraliza o foco da imagem */
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
   opacity: 0;
-  filter: blur(10px) brightness(0.6);
-  transform: scale(1.1) translateY(20px);
-  transition:
-    opacity 1.5s ease,
-    transform 4s ease,
-    filter 1.5s ease;
+  z-index: 1;
   will-change: opacity, transform, filter;
 }
 
-/* IMAGEM ATIVA — efeito GTA */
+/* ── ESTADO ATIVA ── */
 .galeria img.ativa {
   opacity: 1;
-  filter: blur(0px) brightness(1);
-  transform: scale(1.05) translateY(0);
+  transform: scale(1);
+  filter: brightness(1) saturate(1.08);
+  z-index: 2;
+}
+
+/* ══════════════════════════════════════ */
+/* ANIMAÇÕES DE ENTRADA                  */
+/* ══════════════════════════════════════ */
+
+/* SLIDE DA ESQUERDA */
+.galeria img.entrando.slide-left {
+  opacity: 0;
+  transform: translateX(100%) scale(0.95);
+  filter: brightness(0.6);
+  transition:
+    opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.85s ease;
+}
+.galeria img.entrando.slide-left.ativa {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  filter: brightness(1) saturate(1.08);
+}
+.galeria img.entrando.slide-left.reverse {
+  transform: translateX(-100%) scale(0.95);
+}
+
+/* SLIDE DA DIREITA */
+.galeria img.entrando.slide-right {
+  opacity: 0;
+  transform: translateX(-100%) scale(0.95);
+  filter: brightness(0.6);
+  transition:
+    opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.85s ease;
+}
+.galeria img.entrando.slide-right.ativa {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  filter: brightness(1) saturate(1.08);
+}
+.galeria img.entrando.slide-right.reverse {
+  transform: translateX(100%) scale(0.95);
+}
+
+/* ZOOM IN */
+.galeria img.entrando.zoom-in {
+  opacity: 0;
+  transform: scale(1.18);
+  filter: brightness(0.4) blur(8px);
+  transition:
+    opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.9s ease;
+}
+.galeria img.entrando.zoom-in.ativa {
+  opacity: 1;
+  transform: scale(1);
+  filter: brightness(1) blur(0px) saturate(1.08);
+}
+
+/* ZOOM OUT */
+.galeria img.entrando.zoom-out {
+  opacity: 0;
+  transform: scale(0.78);
+  filter: brightness(0.4) blur(6px);
+  transition:
+    opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.9s ease;
+}
+.galeria img.entrando.zoom-out.ativa {
+  opacity: 1;
+  transform: scale(1);
+  filter: brightness(1) blur(0px) saturate(1.08);
+}
+
+/* SLIDE DE BAIXO */
+.galeria img.entrando.slide-up {
+  opacity: 0;
+  transform: translateY(60px) scale(0.96);
+  filter: brightness(0.5);
+  transition:
+    opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.85s ease;
+}
+.galeria img.entrando.slide-up.ativa {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: brightness(1) saturate(1.08);
+}
+
+/* FADE SIMPLES */
+.galeria img.entrando.fade {
+  opacity: 0;
+  transform: scale(1.03);
+  filter: brightness(0.5) blur(4px);
+  transition:
+    opacity 1s ease,
+    transform 1.2s ease,
+    filter 1s ease;
+}
+.galeria img.entrando.fade.ativa {
+  opacity: 1;
+  transform: scale(1);
+  filter: brightness(1) blur(0px) saturate(1.08);
+}
+
+/* ── SAÍDA ── */
+.galeria img.saindo {
+  opacity: 0;
+  transform: scale(0.94) translateX(-40px);
+  filter: brightness(0.4);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    filter 0.6s ease;
+  z-index: 1;
+}
+.galeria img.saindo.reverse {
+  transform: scale(0.94) translateX(40px);
+}
+
+/* ── KEN BURNS suave na imagem ativa ── */
+@keyframes kenburns {
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+.galeria img.ativa {
+  animation: kenburns 6s ease-in-out forwards;
 }
 
 /* ── BARRA DE PROGRESSO ── */
@@ -76,91 +196,144 @@ h1 {
   bottom: 0;
   left: 0;
   height: 2px;
-  background: rgba(255, 77, 109, .85);
-  z-index: 3;
+  background: linear-gradient(90deg, #ff4d6d, #ff8fa3);
+  z-index: 10;
+  box-shadow: 0 0 8px rgba(255, 77, 109, 0.6);
+}
+
+/* ── TOPO ── */
+.topo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: clamp(14px, 3.5vw, 28px) clamp(16px, 4vw, 32px);
+  z-index: 10;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+h1 {
+  font-weight: 300;
+  font-size: clamp(12px, 2.6vw, 19px);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+  line-height: 1.4;
+}
+
+.badge {
+  font-size: clamp(10px, 1.8vw, 13px);
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.45);
+  white-space: nowrap;
+  padding-top: 3px;
+}
+
+/* ── LEGENDA ── */
+.legenda {
+  position: absolute;
+  bottom: clamp(85px, 16vw, 115px);
+  left: clamp(20px, 5vw, 44px);
+  z-index: 10;
+  max-width: min(60%, 340px);
+}
+
+.legenda span {
+  font-size: clamp(9px, 1.6vw, 12px);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.legenda h2 {
+  font-size: clamp(20px, 4.5vw, 30px);
+  font-weight: 300;
+  line-height: 1.2;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.6);
 }
 
 /* ── BOTÕES ── */
 .botoes {
   position: absolute;
-  bottom: clamp(16px, 4vw, 30px);
+  bottom: clamp(20px, 5vw, 36px);
   left: 50%;
   transform: translateX(-50%);
-  z-index: 2;
+  z-index: 10;
   display: flex;
   align-items: center;
-  gap: clamp(6px, 2vw, 14px);
+  gap: clamp(8px, 2.5vw, 16px);
 }
 
 button {
-  background: rgba(255, 77, 109, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* Safari */
+  background: rgba(255, 77, 109, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   color: white;
-  border: none;
-  padding: clamp(8px, 2vw, 10px) clamp(14px, 3vw, 20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: clamp(8px, 2vw, 11px) clamp(16px, 3.5vw, 22px);
   font-size: clamp(13px, 2vw, 15px);
-  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  border-radius: 100px;
   cursor: pointer;
-  transition: background .2s, transform .15s;
-  /* toque mais fácil no mobile */
+  transition: background 0.2s, transform 0.18s, box-shadow 0.2s;
   min-width: 44px;
   min-height: 44px;
+  box-shadow: 0 4px 20px rgba(255, 77, 109, 0.3);
 }
 
 button:hover {
   background: rgba(255, 31, 75, 0.9);
-  transform: scale(1.04);
+  transform: scale(1.06);
+  box-shadow: 0 6px 24px rgba(255, 77, 109, 0.5);
 }
 
-button:active {
-  transform: scale(0.97);
-}
+button:active { transform: scale(0.95); }
 
-/* ── DOTS / INDICADORES ── */
+/* ── DOTS ── */
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, .35);
+  background: rgba(255, 255, 255, 0.3);
   border: none;
   padding: 0;
   cursor: pointer;
-  transition: background .3s, transform .3s;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  min-width: unset;
+  min-height: unset;
+  box-shadow: none;
 }
 
 .dot.ativo {
   background: #ff4d6d;
   transform: scale(1.5);
+  box-shadow: 0 0 8px rgba(255, 77, 109, 0.7);
 }
 
-/* ── LEGENDA (opcional) ── */
-.legenda {
+/* ── BOTÃO VOLTAR ── */
+.btn-voltar {
   position: absolute;
-  bottom: clamp(60px, 12vw, 90px);
-  left: clamp(16px, 5vw, 40px);
-  z-index: 2;
-  max-width: min(55%, 320px);
+  top: clamp(14px, 3.5vw, 28px);
+  left: clamp(16px, 4vw, 32px);
+  background: rgba(0,0,0,0.35) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  font-size: clamp(11px, 1.8vw, 13px) !important;
+  padding: 6px 14px !important;
+  min-height: unset !important;
+  box-shadow: none !important;
+  z-index: 20;
+  display: none; /* esconde pois o topo já tem o h1; mostre se quiser */
 }
 
-.legenda span {
-  font-size: clamp(10px, 1.8vw, 13px);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.6);
-  display: block;
-  margin-bottom: 4px;
-}
-
-.legenda h2 {
-  font-size: clamp(18px, 4vw, 28px);
-  font-weight: 300;
-  line-height: 1.2;
-}
-
-/* ── RESPONSIVIDADE: landscape mobile ── */
+/* ── LANDSCAPE MOBILE ── */
 @media (max-height: 500px) and (orientation: landscape) {
-  h1 { font-size: 12px; top: 10px; }
-  .botoes { bottom: 10px; }
+  h1 { font-size: 11px; }
+  .botoes { bottom: 8px; }
   .legenda { display: none; }
+  .badge { font-size: 10px; }
 }
