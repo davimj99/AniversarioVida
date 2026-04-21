@@ -273,7 +273,7 @@ button {
   background: rgba(255, 77, 109, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  color: white;
+  color: rgb(14, 13, 13);
   border: 1px solid rgba(255, 255, 255, 0.15);
   padding: clamp(8px, 2vw, 11px) clamp(16px, 3.5vw, 22px);
   font-size: clamp(13px, 2vw, 15px);

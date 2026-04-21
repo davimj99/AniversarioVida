@@ -123,7 +123,7 @@ html, body {
   border: 1.5px solid rgba(201, 72, 91, 0.5);
   border-radius: 100px;
   background: rgba(201, 72, 91, 0.12);
-  color: var(--rose-light);
+  color:whitesmoke;
   font-family: 'DM Sans', sans-serif;
   font-size: 0.95rem;
   font-weight: 400;
@@ -547,11 +547,13 @@ html, body {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%) translateY(0);
-  width: 250%;
+  width: min(90vw, 500px);
+  max-height: 80vh;
   background: white;
   border-radius: 30px 50px 30px 30px;
-  padding: absolute ;
-  box-shadow: 0 -4px 60px rgba(0, 0, 0, 0.2);
+  padding: 0px 0px 0px 0px;
+  overflow-y: auto;    
+  box-shadow: 0 -4px 50px rgb(255, 0, 144);
   transition: transform 1s 0.3s var(--ease-out), opacity 0.6s 0.3s;
   opacity: 0;
   z-index: 10;
@@ -566,8 +568,8 @@ html, body {
 .carta-interna p {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.4rem;
-  font-weight: 700;
-  line-height: 1.2;
+  font-weight: 900;
+  line-height: 1.1;
   color: #2a1a1f;
   font-style: italic;
 }
@@ -587,7 +589,7 @@ html, body {
   margin-top: 1.5rem;
   font-size: 0.78rem;
   color: rgba(252, 232, 237, 0.4);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   animation: pulse-hint 2s ease-in-out infinite;
 }

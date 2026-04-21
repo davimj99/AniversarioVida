@@ -220,6 +220,7 @@ function encerrar() {
   }, 550);
 }
 
+
 /* ══════════════════════════════════════ */
 /* VOLTAR AO INÍCIO                     */
 /* ══════════════════════════════════════ */
@@ -283,6 +284,7 @@ function voltarInicio() {
 function abrirCarta() {
   const env = document.getElementById("envelope");
   const botao = document.getElementById("btnPresente");
+  alert("CLIQUE NO VER PRESENTE !!")
 
   if (env.classList.contains("aberto")) return;
   env.classList.add("aberto");
