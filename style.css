@@ -547,7 +547,7 @@ html, body {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%) translateY(0);
-  width: min(150vw, 400px);
+  width: min(250vw, 400px);
   max-height: 50vh;
   background: white;
   border-radius: 30px 50px 30px 30px;
