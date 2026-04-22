@@ -12,7 +12,7 @@ const cenas = [
   },
   {
     texto: "Cada momento com você é único e perfeito.",
-    imagens: ["imagens/rio.jpg", "imagens/23.jpg"],
+    imagens: ["imagens/rio.jpg", "imagens/royal.jpg"],
     tempo: 4500
   },
   {
@@ -23,7 +23,7 @@ const cenas = [
   { texto: "E eu só queria te lembrar de uma coisa...", imagens: [], tempo: 3000 },
   {
     texto: "Eu te amo muito. De verdade.",
-    imagens: ["imagens/23.jpg", "imagens/b-hotel.jpg"],
+    imagens: ["imagens/royal.jpg", "imagens/b-hotel.jpg"],
     tempo: 4500
   },
   { texto: "Feliz aniversário, meu amor. ♥", imagens: [], tempo: 3500 }

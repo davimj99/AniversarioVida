@@ -652,3 +652,27 @@ html, body {
   opacity: 0;
   transition: opacity 1s ease;
 }
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 180%;
+  backdrop-filter: blur(10px);
+  background: rgba(247, 89, 229, 0.4);
+  color: #060606;
+  text-align: center;
+  padding: 12px 10px;
+  font-family: 'DM Sans', sans-serif;
+  z-index: 10;
+}
+
+.footer-content p {
+  font-size: 14px;
+  margin-bottom: 3px;
+  opacity: 0.9;
+}
+
+.footer-content span {
+  font-size: 12px;
+  opacity: 0.7;
+}
