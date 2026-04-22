@@ -261,7 +261,7 @@ h1 {
 .botoes {
   position: fixed;
   bottom: 80px; /* espaço pro footer */
-  left: 70%;
+  left: 50%;
   transform: translateX(-50%);
   z-index: 30;
   display: flex;
