@@ -3,8 +3,15 @@
 /* ══════════════════════════════════════ */
 
 const cenas = [
-  { texto: "Oi, meu amor...", imagens: [], tempo: 2800 },
-  { texto: "Hoje é um dia muito especial.", imagens: [], tempo: 2800 },
+  { texto: "Oi, meu amor, passando aqui pra te falar, que...", 
+    imagens: ["imagens/parksp.jpg"], 
+    tempo: 3800 
+  },
+    
+  { texto: "Hoje é um dia muito especial.", 
+    imagens: ["imagens/outbaack.jpg"], 
+    tempo: 3800 
+  },
   {
     texto: "Porque é o dia da pessoa mais importante da minha vida.",
     imagens: ["imagens/b-hotel.jpg", "imagens/b-hotel2.jpg"],
@@ -20,13 +27,19 @@ const cenas = [
     imagens: ["imagens/rio.jpg"],
     tempo: 3500
   },
-  { texto: "E eu só queria te lembrar de uma coisa...", imagens: [], tempo: 3000 },
+  { texto: "E eu só queria te lembrar de uma coisa...", 
+    imagens: ["imagens/royal2.jpg"], 
+    tempo: 3000 
+  },
   {
     texto: "Eu te amo muito. De verdade.",
     imagens: ["imagens/royal.jpg", "imagens/b-hotel.jpg"],
     tempo: 4500
   },
-  { texto: "Feliz aniversário, meu amor. ♥", imagens: [], tempo: 3500 }
+  { texto: "Feliz aniversário, meu amor. ♥", 
+    imagens: ["imagens/liberta.jpeg"], 
+    tempo: 3500 
+  }
 ];
 
 /* ══════════════════════════════════════ */
