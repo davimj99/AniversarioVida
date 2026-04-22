@@ -656,10 +656,10 @@ html, body {
 .footer {
   position: fixed;
   bottom: 0;
-  width: 180%;
+  width: 100%;
   backdrop-filter: blur(10px);
   background: rgba(247, 89, 229, 0.4);
-  color: #060606;
+  color: #101010;
   text-align: center;
   padding: 12px 10px;
   font-family: 'DM Sans', sans-serif;
