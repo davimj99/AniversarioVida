@@ -544,23 +544,23 @@ html, body {
 /* CARTA INTERNA */
 .carta-interna {
   position: absolute;
-  bottom: 0;
+  bottom: -50px;
   left: 50%;
   transform: translateX(-50%) translateY(0);
 
-  width: 90vw;              /* ocupa bem no mobile */
-  max-width: 400px;         /* limita no desktop */
+  width: 90vw;
+  max-width: 400px;
   
-  max-height: 60vh;         /* mais espaço vertical */
-  overflow-y: auto;         /* permite rolagem se precisar */
+  max-height: 75vh;
+  overflow-y: auto;
 
   background: white;
   border-radius: 30px 50px 30px 30px;
-  padding: 4px;  
+  padding: 4px;
 
   box-shadow: 0 -4px 50px rgb(255, 0, 144);
   transition: transform 1s 0.3s var(--ease-out), opacity 0.6s 0.3s;
-  
+
   opacity: 0;
   z-index: 10;
   text-align: center;
